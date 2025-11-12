@@ -1,0 +1,125 @@
+.order-management-container {
+
+    .status_-1,
+    .status_0,
+    .status_1 {
+        color: #ffc107;
+        border-color: #ffc107;
+    }
+
+    .status_2,
+    .status_3 {
+        color: #6fce16;
+        border-color: #6fce16;
+    }
+
+    .status_4,
+    .status_5 {
+        color: #28a745;
+        border-color: #28a745;
+    }
+
+    .status_6,
+    .status_7,
+    .status_8 {
+        color: #007bff;
+        border-color: #007bff;
+    }
+
+    .status_9,
+    .status_10 {
+        color: #dc3545;
+        border-color: #dc3545;
+    }
+
+    .admin-table-container {
+        .admin-table {
+            tbody {
+                .field {
+                    display: flex;
+                    gap: 12px;
+
+                    .field-image {
+                        width: 120px;
+                        min-width: 120px;
+                        height: 120px;
+                        border-radius: 16px;
+                        overflow: hidden;
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+
+                    .field-info {
+                        display: flex;
+                        flex-direction: column;
+
+                        .name {
+                            font-size: 22px;
+                            font-weight: 500;
+                            color: var(--text-primary);
+                        }
+
+                        .price {
+                            color: #ffc107;
+                        }
+
+                        .total {
+                            font-size: 20px;
+                            color: #fb8b24;
+                        }
+                    }
+                }
+
+                .form-status {
+                    select {
+                        background-color: transparent;
+                    }
+                }
+
+                .form-payment {
+                    select {
+                        background-color: transparent;
+                    }
+
+                    .status_0 {
+                        color: #ffc107;
+                        border-color: #ffc107;
+                    }
+
+                    .status_1 {
+                        color: #28a745;
+                        border-color: #28a745;
+                    }
+
+                    .status_2 {
+                        color: #dc3545;
+                        border-color: #dc3545;
+                    }
+                }
+
+                .method {
+                    margin: 0 0 8px;
+                }
+
+                /* .payment {
+                    .success {
+                        color: #28a745;
+                        border: 2px solid #28a745;
+                        border-radius: 6px;
+                        padding: 4px 6px;
+                    }
+
+                    .notyet {
+                        color: #ffc107;
+                        border: 2px solid #ffc107;
+                        border-radius: 6px;
+                        padding: 4px 6px;
+                    }
+                } */
+            }
+        }
+    }
+}

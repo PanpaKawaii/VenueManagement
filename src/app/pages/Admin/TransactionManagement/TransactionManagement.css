@@ -1,0 +1,34 @@
+.transaction-management-container {
+    .controls {
+        i {
+            color: var(--text-secondary);
+            font-size: 24px;
+            align-content: center;
+        }
+    }
+
+    .payment {
+        div {
+            width: auto;
+            padding: 4px 6px;
+            box-sizing: content-box;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .notyet {
+            color: #ffc107;
+            border: 2px solid #ffc107;
+        }
+
+        .success {
+            color: #28a745;
+            border: 2px solid #28a745;
+        }
+
+        .fail {
+            color: #dc3545;
+            border: 2px solid #dc3545;
+        }
+    }
+}

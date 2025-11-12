@@ -1,0 +1,1 @@
+# Chứa những đối tượng được xài ở nhiều nơi

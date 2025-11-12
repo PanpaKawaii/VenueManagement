@@ -1,0 +1,23 @@
+.small-spinner {
+    /* flex: 1; */
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: small-spinner-rotate 1s linear infinite;
+
+    i {
+        margin: 0 !important;
+    }
+}
+
+@keyframes small-spinner-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

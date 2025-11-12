@@ -1,0 +1,1 @@
+# Chứa hooks xài cho nhiều màn hình khác nhau

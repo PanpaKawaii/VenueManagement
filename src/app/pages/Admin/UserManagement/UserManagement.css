@@ -1,0 +1,303 @@
+.management-container {
+    background-color: var(--gray-1);
+
+    button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        color: var(--text-secondary);
+        border: 2px solid var(--gray-3);
+    }
+
+    /* select {
+        color: var(--text-primary);
+        background-color: var(--button-secondary-bg);
+        border: 2px solid var(--gray-3);
+
+        &:hover {
+            background-color: #30363D;
+        }
+    } */
+
+    .main-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 0 24px;
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .btn-primary {
+            color: var(--button-primary-text);
+            background-color: var(--button-primary-bg);
+            border-color: var(--button-primary-bg);
+
+            &:hover {
+                background-color: #E6EDF3;
+            }
+        }
+    }
+
+    .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin: 0 0 24px;
+
+        .count {
+            align-content: center;
+            color: var(--text-primary);
+            background-color: var(--gray-2);
+            border: 2px solid var(--gray-3);
+            border-radius: 6px;
+            border-style: dashed;
+            padding: 0 12px;
+        }
+
+        .search-bar {
+            display: flex;
+            flex: 1 1 200px;
+            align-items: center;
+            background-color: var(--gray-2);
+            border: 2px solid var(--gray-3);
+            border-radius: 6px;
+            padding: 0 12px;
+
+            i {
+                color: var(--text-secondary);
+                margin: 0 12px 0 0;
+                display: flex;
+                align-items: center;
+            }
+
+            input {
+                padding: 8px 0;
+                flex: 1;
+                color: var(--text-primary);
+                background-color: transparent;
+                border: none;
+                outline: none;
+                font-size: 14px;
+
+                &::placeholder {
+                    color: var(--text-secondary);
+                }
+            }
+        }
+
+        .field {
+
+            select,
+            input {
+                color: var(--text-primary);
+                background-color: transparent;
+                border: 2px solid var(--gray-3);
+
+                .option {
+                    color: var(--text-secondary);
+                }
+
+                .option-type {
+                    color: #ffc107;
+                }
+
+                .option-status {
+                    color: #28a745;
+                }
+
+                .option-method {
+                    color: #007bff;
+                }
+
+                .option-vip {
+                    color: #ffc107;
+                }
+
+                .option-regular {
+                    color: #808080;
+                }
+
+                .option-active {
+                    color: #28a745;
+                }
+
+                .option-banned {
+                    color: #dc3545;
+                }
+            }
+        }
+
+        .btn-secondary {
+            color: var(--text-primary);
+            background-color: var(--button-secondary-bg);
+
+            &:hover {
+                background-color: #30363D;
+            }
+        }
+    }
+
+    .admin-table-container {
+        color: var(--text-primary);
+        background-color: var(--gray-2);
+        border: 2px solid var(--gray-3);
+        border-radius: 8px;
+        overflow: hidden;
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+
+            i {
+                margin: 0 0 0 8px;
+            }
+
+            th,
+            td {
+                padding: 16px 20px;
+                text-align: left;
+                vertical-align: middle;
+                border-bottom: 2px solid var(--gray-3);
+            }
+
+            th {
+                font-size: 12px;
+                font-weight: 500;
+                color: var(--text-secondary);
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+
+            th:nth-child(1) {
+                width: 0px;
+            }
+
+            tbody {
+                tr:last-child {
+                    td {
+                        border-bottom: none;
+                    }
+                }
+
+                .customer-name-cell {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+
+                    .avatar {
+                        width: 40px;
+                        min-width: 40px;
+
+                        img {
+                            display: block;
+                            width: 40px;
+                            height: 40px;
+                            object-fit: cover;
+                            object-position: center;
+                            box-sizing: border-box;
+                            border: 2px solid var(--gray-3);
+                            border-radius: 50%;
+                            overflow: hidden;
+                        }
+                    }
+
+                    .customer-info {
+                        display: flex;
+                        flex-direction: column;
+
+                        .name {
+                            font-weight: 500;
+                            color: var(--text-primary);
+                        }
+
+                        .role {
+                            height: 21px;
+                            font-size: 13px;
+                            color: var(--text-secondary);
+                        }
+                    }
+                }
+
+                .contact {
+                    width: fit-content;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+
+                    .name {
+                        font-size: 20px;
+                        color: #b9dbff;
+                    }
+
+                    .contact-user,
+                    .contact-phone,
+                    .contact-email {
+                        width: fit-content;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+
+                        i {
+                            color: var(--text-secondary);
+                        }
+                    }
+                }
+
+                .address,
+                .description {
+                    max-width: 300px;
+                }
+
+                .action-buttons {
+                    display: flex;
+                    align-items: center;
+                    gap: 16px;
+
+                    button {
+                        padding: 0;
+                        background: none;
+                        border: none;
+                        color: var(--text-secondary);
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0;
+                        cursor: pointer;
+                        font-size: 14px;
+
+                        &.abb {
+                            opacity: 0.5;
+                        }
+
+                        &:hover {
+                            color: var(--text-primary);
+                            opacity: 1;
+                        }
+
+                        &.btn-banned {
+                            color: #dc3545;
+                        }
+
+                        &.btn-delete {
+                            color: #ff0000;
+                        }
+
+                        &.btn-active {
+                            color: #28a745;
+                        }
+
+                        &:disabled {
+                            opacity: 1;
+                            text-shadow: 0 0 8px #ffffff80;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

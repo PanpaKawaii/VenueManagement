@@ -1,0 +1,186 @@
+@keyframes LoginRegisterUpdown {
+    0% {
+        transform: translate(-50%, 0);
+    }
+
+    50% {
+        transform: translate(-50%, -20px);
+    }
+
+    100% {
+        transform: translate(-50%, 0);
+    }
+}
+
+.loginregister-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--gray-1);
+
+    .card-box {
+        margin: auto;
+        padding: 40px;
+        width: 400px;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 4px 8px #00000040;
+        overflow: hidden;
+        border-radius: 20px;
+        position: relative;
+        z-index: 1;
+        box-sizing: border-box;
+        position: relative;
+        background-color: var(--gray-2);
+        border: 2px solid var(--gray-3);
+
+        .bubble {
+            z-index: -1;
+            position: absolute;
+            border-radius: 50%;
+            background-color: #007bff20;
+            /* border: 2px solid #007bff; */
+
+            &.bubble1 {
+                width: 100px;
+                height: 100px;
+                top: 10%;
+                left: 35%;
+                animation: LoginRegisterUpdown 2.5s ease-in-out infinite;
+            }
+
+            &.bubble2 {
+                width: 150px;
+                height: 150px;
+                top: 30%;
+                left: 70%;
+                animation: LoginRegisterUpdown 3s ease-in-out infinite;
+            }
+
+            &.bubble3 {
+                width: 70px;
+                height: 70px;
+                top: 70%;
+                left: 20%;
+                animation: LoginRegisterUpdown 3.5s ease-in-out infinite;
+            }
+        }
+
+        .title {
+            margin: 0 0 32px;
+            color: #007bff;
+            text-align: center;
+            font-weight: bold;
+            font-size: 36px;
+        }
+
+        form {
+            position: relative;
+
+            .form-group {
+                margin: 0 0 12px 32px;
+
+                i {
+                    position: absolute;
+                    left: 0;
+                    margin: 6px 0;
+                    color: var(--text-secondary);
+                    font-size: 24px;
+
+                    &.invalid-icon {
+                        color: #dc3545;
+                    }
+                }
+
+                input {
+                    width: 100%;
+                    color: var(--text-primary);
+                    background-color: transparent;
+                    border: 2px solid var(--gray-3);
+
+                    &:focus {
+                        box-shadow: 0 0 0 4px #007bff40;
+                        border-color: #007bff;
+                    }
+                }
+            }
+
+            .form-check {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                label {
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    color: var(--text-secondary);
+
+                    input {
+                        cursor: pointer;
+                    }
+                }
+
+                .forget-link {
+                    color: #007bff;
+                    font-weight: bold;
+
+                    &:hover {
+                        color: #0069da;
+                    }
+                }
+            }
+
+            .message {
+                margin: 8px 8px 4px;
+                height: 20px;
+                font-weight: bold;
+
+                &.error-message {
+                    color: #dc3545;
+                }
+
+                &.success-message {
+                    color: #28a745;
+                }
+            }
+
+            .btn-box {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 8px;
+
+                .btn-submit {
+                    flex: 3;
+                    color: #fff;
+                    background-color: #007bff;
+
+                    &:hover {
+                        background-color: #006de2;
+                    }
+
+                    &:active {
+                        background-color: #0058b6;
+                    }
+                }
+
+                .btn-reset {
+                    flex: 1;
+                    color: #fff;
+                    background-color: #4ba2ff;
+
+                    &:hover {
+                        background-color: #2e93ff;
+                    }
+
+                    &:active {
+                        background-color: #007bff;
+                    }
+                }
+            }
+        }
+    }
+}

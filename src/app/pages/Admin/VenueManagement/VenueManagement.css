@@ -1,0 +1,166 @@
+.venue-management-container,
+.field-management-container,
+.image-management-container,
+.slot-management-container {
+
+    .flex {
+        display: flex;
+        gap: 20px;
+
+        .btn-back {
+            padding: 0 16px;
+            background-color: transparent;
+            font-size: 20px;
+        }
+    }
+
+    .field {
+        display: flex;
+        gap: 12px;
+        color: var(--text-primary);
+
+        .field-info {
+            display: flex;
+            flex-direction: column;
+
+            .name {
+                font-size: 22px;
+                font-weight: 500;
+                color: var(--text-primary);
+            }
+
+            .type {
+                color: var(--text-secondary);
+            }
+
+            .price {
+                margin: 8px 0 0;
+                color: #fb8b24;
+                font-size: 20px;
+            }
+        }
+    }
+
+    .rating {
+        color: #ffd700;
+        font-size: 32px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+
+        i {
+            margin: 0 4px;
+            font-size: 24px;
+        }
+    }
+
+    .description {
+        max-width: 600px !important;
+    }
+
+    .venue-name-cell {
+        color: var(--text-primary);
+
+        .image {
+            width: 160px;
+            min-width: 160px;
+
+            img {
+                display: block;
+                width: 100%;
+                min-width: 160px;
+                height: 160px;
+                object-fit: cover;
+                object-position: center;
+                box-sizing: border-box;
+                border: 2px solid var(--gray-3);
+                border-radius: 12px;
+                overflow: hidden;
+            }
+        }
+    }
+
+    .relative {
+        position: relative;
+    }
+
+    .to-image {
+        position: absolute;
+        bottom: 12px;
+        right: 12px;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #64d47e;
+        border: 2px solid #28a74580;
+        border-radius: 50%;
+
+        i {
+            margin: 0 !important;
+            color: #fff;
+            font-size: 20px;
+        }
+    }
+
+    .action-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: start !important;
+
+        &.flex-buttons {
+            flex-direction: row;
+        }
+    }
+
+    .images {
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        justify-content: center;
+
+        .img-row {
+            padding: 20px 0;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+
+            .img-col {
+                display: flex;
+                justify-content: center;
+                align-items: start;
+                cursor: pointer;
+
+                .grid-card {
+                    width: 400px;
+                    height: fit-content;
+                    box-sizing: border-box;
+
+                    .image {
+                        width: 100%;
+                        height: 100%;
+                        padding: 8px;
+                        background-color: #b9dbff;
+                        border: 2px solid var(--gray-3);
+                        border-radius: 16px;
+                        box-sizing: border-box;
+
+
+                        img {
+                            display: block;
+                            width: 100%;
+                            height: auto;
+                            border-radius: 8px;
+                        }
+                    }
+                }
+
+                .name {
+                    margin: 4px;
+                    color: var(--text-primary);
+                }
+            }
+        }
+    }
+}
