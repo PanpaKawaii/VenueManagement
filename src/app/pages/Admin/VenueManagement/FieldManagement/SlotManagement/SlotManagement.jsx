@@ -59,7 +59,7 @@ export default function SlotManagement() {
 
     const disableSlot = async (slot) => {
         const token = '';
-        const newSlot = { ...slot, status: slot.status == 1 ? 0 : 1 };
+        const newSlot = { ...slot, status: slot.status == 1 ? 0 : 1 }; // New Status
         try {
             const SlotResult = await putData(`Slot/${newSlot.id}`, newSlot, token);
             console.log('SlotResult', SlotResult);
@@ -80,12 +80,16 @@ export default function SlotManagement() {
         }
     }
 
-    // FIX==Filter
     const [searchSlot, setSearchSlot] = useState('');
+    const [select, setSelect] = useState(1);
     const slotsFilter = SLOTs.filter((slot) => {
         const slotName = slot.name?.toLowerCase();
+        const slotStatus = slot.status;
+
         const matchSearch = !searchSlot || slotName?.includes(searchSlot.toLowerCase());
-        return matchSearch;
+        const matchStatus = !select || slotStatus == select;
+
+        return matchSearch && matchStatus;
     });
     const handleClear = () => {
         setSearchSlot('');
@@ -115,6 +119,13 @@ export default function SlotManagement() {
                     <div className='search-bar'>
                         <i className='fa-solid fa-magnifying-glass' />
                         <input type='text' placeholder='Search by name, email, phone...' value={searchSlot} onChange={(e) => setSearchSlot(e.target.value)} />
+                    </div>
+                    <div className='field'>
+                        <select id='formSelect' value={select} onChange={(e) => setSelect(e.target.value)}>
+                            <option className='option' value={''}>-- Status --</option>
+                            <option className='option-active' value={1}>Active</option>
+                            <option className='option-banned' value={0}>Disable</option>
+                        </select>
                     </div>
                     <button type='button' className='btn-secondary' onClick={handleClear}>
                         CLEAR
@@ -202,10 +213,10 @@ export default function SlotManagement() {
                 {popupProps && (
                     <ConfirmDialog
                         title={'CONFIRMATION'}
-                        message={`Are you sure you want to delete this slot?`}
-                        confirm={'DELETE'}
+                        message={`Are you sure you want to ${popupProps.status == 1 ? 'disable' : 'active'} this slot?`}
+                        confirm={popupProps.status == 1 ? 'DISABLE' : 'ACTIVE'}
                         cancel={'CANCEL'}
-                        color={'#dc354580'}
+                        color={popupProps.status == 1 ? '#dc354580' : '#28a74580'}
                         onConfirm={() => { disableSlot(popupProps), setPopupProps(null) }}
                         onCancel={() => setPopupProps(null)}
                     />
@@ -214,7 +225,7 @@ export default function SlotManagement() {
                 {deleteProps && (
                     <ConfirmDialog
                         title={'CONFIRMATION'}
-                        message={`Are you sure you want to delete this field?`}
+                        message={`Are you sure you want to delete this slot?`}
                         confirm={'DELETE'}
                         cancel={'CANCEL'}
                         color={'#ff0000'}

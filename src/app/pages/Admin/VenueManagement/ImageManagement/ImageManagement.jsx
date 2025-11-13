@@ -50,7 +50,7 @@ export default function ImageManagement() {
 
     const disableImage = async (image) => {
         const token = '';
-        const newImage = { ...image, status: image.status == 1 ? 0 : 1 };
+        const newImage = { ...image, status: image.status == 1 ? 0 : 1 }; // New Status
         try {
             const ImageResult = await putData(`Image/${newImage.id}`, newImage, token);
             console.log('ImageResult', ImageResult);
@@ -60,23 +60,27 @@ export default function ImageManagement() {
         }
     }
 
-    const deleteSlot = async (slot) => {
+    const deleteImage = async (image) => {
         const token = '';
         try {
-            const SlotResult = await deleteData(`Slot/${slot.id}`, token);
-            console.log('SlotResult', SlotResult);
+            const ImageResult = await deleteData(`Image/${image.id}`, token);
+            console.log('ImageResult', ImageResult);
             setRefresh(p => p + 1);
         } catch (error) {
             setErrorFunction('Error');
         }
     }
 
-    // FIX==Filter
     const [searchImage, setSearchImage] = useState('');
+    const [select, setSelect] = useState(1);
     const imagesFilter = IMAGEs.filter((image) => {
         const imageName = image.name?.toLowerCase();
+        const imageStatus = image.status;
+
         const matchSearch = !searchImage || imageName?.includes(searchImage.toLowerCase());
-        return matchSearch;
+        const matchStatus = !select || imageStatus == select;
+
+        return matchSearch && matchStatus;
     });
     const handleClear = () => {
         setSearchImage('');
@@ -107,6 +111,13 @@ export default function ImageManagement() {
                         <i className='fa-solid fa-magnifying-glass' />
                         <input type='text' placeholder='Search by name, email, phone...' value={searchImage} onChange={(e) => setSearchImage(e.target.value)} />
                     </div>
+                    <div className='field'>
+                        <select id='formSelect' value={select} onChange={(e) => setSelect(e.target.value)}>
+                            <option className='option' value={''}>-- Status --</option>
+                            <option className='option-active' value={1}>Active</option>
+                            <option className='option-banned' value={0}>Disable</option>
+                        </select>
+                    </div>
                     <button type='button' className='btn-secondary' onClick={handleClear}>
                         CLEAR
                     </button>
@@ -132,10 +143,10 @@ export default function ImageManagement() {
                                         <i className='fa-solid fa-pencil' />
                                     </button>
                                     <button className={`btn-banned`} onClick={() => setPopupProps(image)}>
-                                        <span>Delete</span>
-                                        <i className='fa-solid fa-trash-can' />
+                                        <span>Disable</span>
+                                        <i className='fa-solid fa-ban' />
                                     </button>
-                                    <button className='btn-delete abb' onClick={() => setDeleteProps(slot)}>
+                                    <button className='btn-delete abb' onClick={() => setDeleteProps(image)}>
                                         <span>Delete</span>
                                         <i className='fa-solid fa-trash-can' />
                                     </button>
@@ -168,10 +179,10 @@ export default function ImageManagement() {
                 {popupProps && (
                     <ConfirmDialog
                         title={'CONFIRMATION'}
-                        message={`Are you sure you want to delete this image?`}
-                        confirm={'DELETE'}
+                        message={`Are you sure you want to ${popupProps.status == 1 ? 'disable' : 'active'} this image?`}
+                        confirm={popupProps.status == 1 ? 'DISABLE' : 'ACTIVE'}
                         cancel={'CANCEL'}
-                        color={'#dc354580'}
+                        color={popupProps.status == 1 ? '#dc354580' : '#28a74580'}
                         onConfirm={() => { disableImage(popupProps), setPopupProps(null) }}
                         onCancel={() => setPopupProps(null)}
                     />
@@ -180,11 +191,11 @@ export default function ImageManagement() {
                 {deleteProps && (
                     <ConfirmDialog
                         title={'CONFIRMATION'}
-                        message={`Are you sure you want to delete this field?`}
+                        message={`Are you sure you want to delete this image?`}
                         confirm={'DELETE'}
                         cancel={'CANCEL'}
                         color={'#ff0000'}
-                        onConfirm={() => { deleteSlot(deleteProps), setDeleteProps(null) }}
+                        onConfirm={() => { deleteImage(deleteProps), setDeleteProps(null) }}
                         onCancel={() => setDeleteProps(null)}
                     />
                 )}

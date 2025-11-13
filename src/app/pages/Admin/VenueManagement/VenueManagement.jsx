@@ -58,7 +58,7 @@ export default function VenueManagement() {
 
     const disableVenue = async (venue) => {
         const token = '';
-        const newVenue = { ...venue, status: venue.status == 1 ? 0 : 1 };
+        const newVenue = { ...venue, status: venue.status == 1 ? 0 : 1 }; // New Status
         try {
             const VenueResult = await putData(`Venue/${newVenue.id}`, newVenue, token);
             console.log('VenueResult', VenueResult);
