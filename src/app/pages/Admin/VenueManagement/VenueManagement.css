@@ -87,7 +87,7 @@
     .to-image {
         position: absolute;
         bottom: 12px;
-        right: 12px;
+        left: 12px;
         width: 32px;
         height: 32px;
         display: flex;
@@ -156,9 +156,13 @@
                     }
                 }
 
-                .name {
+                .id-name {
                     margin: 4px;
                     color: var(--text-primary);
+
+                    .id {
+                        color: var(--text-secondary);
+                    }
                 }
             }
         }

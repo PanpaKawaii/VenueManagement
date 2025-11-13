@@ -107,8 +107,8 @@ export default function EditVenueModal({ venueprop, user, onClose, setRefresh, a
                         <LeafletMap
                             location={{
                                 name: venue.name,
-                                latitude: venue.latitude || 0,
-                                longitude: venue.longitude || 0
+                                latitude: Number(venue.latitude) || 0,
+                                longitude: Number(venue.longitude) || 0
                             }}
                             height={'240px'}
                             getLocation={true}

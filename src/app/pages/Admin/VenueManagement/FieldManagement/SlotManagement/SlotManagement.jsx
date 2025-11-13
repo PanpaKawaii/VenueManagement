@@ -11,6 +11,7 @@ export default function SlotManagement() {
     const navigate = useNavigate();
 
     const [SLOTs, setSLOTs] = useState([]);
+    const [thisField, setThisField] = useState(null);
     const [refresh, setRefresh] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -19,6 +20,7 @@ export default function SlotManagement() {
     const [creating, setCreating] = useState(false);
     const [popupProps, setPopupProps] = useState(null);
     const [deleteProps, setDeleteProps] = useState(null);
+    const [addNextProps, setAddNextProps] = useState(null);
 
     useEffect(() => {
         const fetchDataAPI = async () => {
@@ -28,11 +30,17 @@ export default function SlotManagement() {
             try {
                 const SlotResponse = await fetchData('Slot', token);
                 console.log('SlotResponse', SlotResponse);
+                const FieldResponse = await fetchData('Field', token);
+                console.log('FieldResponse', FieldResponse);
 
                 const Slots = SlotResponse.filter(slot => slot.fieldId == FieldId);
                 console.log('Slots', Slots);
 
+                const Field = FieldResponse.find(field => field.id == FieldId);
+                console.log('Slots', Slots);
+
                 setSLOTs(Slots);
+                setThisField(Field);
             } catch (error) {
                 setError('Error');
             } finally {
@@ -44,7 +52,8 @@ export default function SlotManagement() {
     }, [refresh]);
 
     const openEditModal = (data) => { setEditing(data); };
-    const closeEditModal = () => { setEditing(null); };
+    const openAddNextModal = (data) => { setAddNextProps(data); };
+    const closeEditModal = () => { setEditing(null); setAddNextProps(null); };
     const openCreateModal = () => { setCreating(true); };
     const closeCreateModal = () => { setCreating(false); };
 
@@ -93,7 +102,7 @@ export default function SlotManagement() {
                         <button className='btn-back' onClick={() => navigate(-1)}>
                             <i className='fa-solid fa-chevron-left' />
                         </button>
-                        <h1>Slot Management</h1>
+                        <h1>Slot Management - {thisField?.name}</h1>
                     </div>
                     <button className='btn-primary' onClick={() => openCreateModal(true)}>
                         <i className='fa-solid fa-plus' />
@@ -130,7 +139,7 @@ export default function SlotManagement() {
                         <tbody>
                             {slotsFilter?.map((slot, index) => (
                                 <tr key={index}>
-                                    <td>{index + 1}</td>
+                                    <td>#{index + 1}/ID{slot.id}</td>
                                     <td>{slot.name}</td>
                                     <td>{slot.startTime}</td>
                                     <td>{slot.endTime}</td>
@@ -140,6 +149,10 @@ export default function SlotManagement() {
                                             <button onClick={() => openEditModal(slot)}>
                                                 <span>Modify</span>
                                                 <i className='fa-solid fa-pencil' />
+                                            </button>
+                                            <button onClick={() => openAddNextModal(slot)}>
+                                                <span>Add next</span>
+                                                <i className='fa-solid fa-plus' />
                                             </button>
                                             <button className={`btn-active ${slot.status == 0 && 'abb'}`} onClick={() => setPopupProps(slot)} disabled={slot.status == 1}>
                                                 <span>Active</span>
@@ -207,6 +220,22 @@ export default function SlotManagement() {
                         color={'#ff0000'}
                         onConfirm={() => { deleteSlot(deleteProps), setDeleteProps(null) }}
                         onCancel={() => setDeleteProps(null)}
+                    />
+                )}
+
+                {addNextProps && (
+                    <EditSlotModal
+                        slotprop={{
+                            name: 'Slot ' + (slotsFilter?.length + 1),
+                            startTime: (String((Number(addNextProps.startTime?.split(':')?.[0]) || 0) + 1).length == 1 && '0') + ((Number(addNextProps.startTime?.split(':')?.[0]) || 0) + 1) + ':00:00',
+                            endTime: (String((Number(addNextProps.startTime?.split(':')?.[0]) || 0) + 2).length == 1 && '0') + ((Number(addNextProps.startTime?.split(':')?.[0]) || 0) + 2) + ':00:00',
+                            price: addNextProps.price || 0,
+                            status: 1,
+                            fieldId: FieldId
+                        }}
+                        onClose={closeEditModal}
+                        setRefresh={setRefresh}
+                        action={'create'}
                     />
                 )}
 

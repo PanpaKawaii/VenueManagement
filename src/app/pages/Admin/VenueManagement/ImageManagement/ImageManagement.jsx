@@ -71,6 +71,7 @@ export default function ImageManagement() {
         }
     }
 
+    // FIX==Filter
     const [searchImage, setSearchImage] = useState('');
     const imagesFilter = IMAGEs.filter((image) => {
         const imageName = image.name?.toLowerCase();
@@ -122,7 +123,10 @@ export default function ImageManagement() {
                                     <div className='image'>
                                         <img src={`${image.link}`} alt={image.name} />
                                     </div>
-                                    <div className='name'>{image.name}</div>
+                                    <div className='id-name'>
+                                        <div className='id'>#{index + 1}/ID{image.id}</div>
+                                        <div>{image.name}</div>
+                                    </div>
                                     <button onClick={() => openEditModal(image)}>
                                         <span>Modify</span>
                                         <i className='fa-solid fa-pencil' />

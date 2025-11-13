@@ -12,6 +12,7 @@ export default function FieldManagement() {
 
     const [FIELDs, setFIELDs] = useState([]);
     const [TYPEs, setTYPEs] = useState([]);
+    const [thisVenue, setThisVenue] = useState(null);
     const [refresh, setRefresh] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -35,6 +36,8 @@ export default function FieldManagement() {
                 console.log('SlotResponse', SlotResponse);
                 const BookingResponse = await fetchData('Booking', token);
                 console.log('BookingResponse', BookingResponse);
+                const VenueResponse = await fetchData('Venue', token);
+                console.log('VenueResponse', VenueResponse);
 
                 const Fields = FieldResponse
                     .filter(field => field.venueId == VenueId)
@@ -60,8 +63,12 @@ export default function FieldManagement() {
                 });
                 console.log('fieldsWithRating', fieldsWithRating);
 
+                const Venue = VenueResponse.find(venue => venue.id == VenueId);
+                console.log('Venue', Venue);
+
                 setFIELDs(fieldsWithRating);
                 setTYPEs(TypeResponse);
+                setThisVenue(Venue);
             } catch (error) {
                 setError('Error');
             } finally {
@@ -109,7 +116,7 @@ export default function FieldManagement() {
 
     const [searchField, setSearchField] = useState('');
     const [selectedType, setSelectedType] = useState('');
-    const [selectedStatus, setSelectedStatus] = useState('');
+    const [selectedStatus, setSelectedStatus] = useState(1);
     const fieldsFilter = FIELDs.filter((field) => {
         const fieldName = field.name?.toLowerCase();
         const fieldType = field.type?.id;
@@ -138,7 +145,7 @@ export default function FieldManagement() {
                         <button className='btn-back' onClick={() => navigate(`/admin/venue-management`)}>
                             <i className='fa-solid fa-chevron-left' />
                         </button>
-                        <h1>Field Management</h1>
+                        <h1>Field Management - {thisVenue?.name}</h1>
                     </div>
                     <button className='btn-primary' onClick={() => openCreateModal(true)}>
                         <i className='fa-solid fa-plus' />
@@ -189,7 +196,7 @@ export default function FieldManagement() {
                         <tbody>
                             {fieldsFilter?.map((field, index) => (
                                 <tr key={index}>
-                                    <td>{index + 1}</td>
+                                    <td>#{index + 1}/ID{field.id}</td>
                                     <td>
                                         <Link to={`./${field.id}/slot-management`} className='field'>
                                             <div className='field-info'>

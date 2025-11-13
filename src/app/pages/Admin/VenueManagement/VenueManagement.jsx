@@ -80,7 +80,7 @@ export default function VenueManagement() {
     }
 
     const [searchVenue, setSearchVenue] = useState('');
-    const [select, setSelect] = useState('');
+    const [select, setSelect] = useState(1);
     const venuesFilter = VENUEs.filter((venue) => {
         const venueName = venue.name?.toLowerCase();
         const venuePhone = venue.contact?.toLowerCase();
@@ -150,7 +150,7 @@ export default function VenueManagement() {
                         <tbody>
                             {venuesFilter?.map((venue, index) => (
                                 <tr key={index}>
-                                    <td>{index + 1}</td>
+                                    <td>#{index + 1}/ID{venue.id}</td>
                                     <td className='relative'>
                                         <Link to={`./${venue.id}/field-management`} className='venue-name-cell'>
                                             <div className='image'>
@@ -168,7 +168,7 @@ export default function VenueManagement() {
                                     </td>
                                     <td><div className='address'>{venue.address}</div></td>
                                     <td>
-                                        <LeafletMap location={{ name: venue.name, latitude: venue.latitude || 0, longitude: venue.longitude || 0 }} height={'160px'} getLocation={false} />
+                                        <LeafletMap location={{ name: venue.name, latitude: Number(venue.latitude) || 0, longitude: Number(venue.longitude) || 0 }} height={'160px'} getLocation={false} />
                                     </td>
                                     <td>
                                         <div className='action-buttons'>

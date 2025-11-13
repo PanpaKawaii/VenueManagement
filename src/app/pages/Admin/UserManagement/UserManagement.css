@@ -149,6 +149,7 @@
         border: 2px solid var(--gray-3);
         border-radius: 8px;
         overflow: hidden;
+        margin: 0 0 100px;
 
         .admin-table {
             width: 100%;
